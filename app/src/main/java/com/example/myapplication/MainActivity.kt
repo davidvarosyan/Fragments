@@ -2,8 +2,12 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 
 class MainActivity : AppCompatActivity(), UserCreateFragmentListener, UserDetailFragmentListener {
+
 
     private val userCreateFragment = UserCreateFragment()
     private val userDetailFragment = UserDetailFragment()
@@ -12,6 +16,7 @@ class MainActivity : AppCompatActivity(), UserCreateFragmentListener, UserDetail
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         userCreateFragment.userCreateFragmentListener = this
         userDetailFragment.listener = this
 
@@ -19,8 +24,7 @@ class MainActivity : AppCompatActivity(), UserCreateFragmentListener, UserDetail
     }
 
 
-    override fun onUserCreated(user: User) {
-        userDetailFragment.user = user
+    override fun onUserCreated() {
         supportFragmentManager.beginTransaction().replace(R.id.container, userDetailFragment)
             .commit()
     }

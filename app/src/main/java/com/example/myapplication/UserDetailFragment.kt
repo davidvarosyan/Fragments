@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import kotlinx.android.synthetic.main.fragment_user_detail.*
 
 class UserDetailFragment : Fragment() {
 
-    var user:User? = null
     var listener:UserDetailFragmentListener? = null
 
 
@@ -26,7 +27,7 @@ class UserDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        user?.let {
+        ViewModelProvider(activity as ViewModelStoreOwner).get(SharedViewModel::class.java).user?.let {
             name_text.text = it.name
             surname_text.text = it.surname
             age_text.text = it.age.toString()
