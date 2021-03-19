@@ -3,32 +3,20 @@ package com.example.myapplication
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-class MainActivity : AppCompatActivity(), UserCreateFragmentListener, UserDetailFragmentListener {
-
-    private val userCreateFragment = UserCreateFragment()
-    private val userDetailFragment = UserDetailFragment()
+class MainActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        userCreateFragment.userCreateFragmentListener = this
-        userDetailFragment.listener = this
 
-        supportFragmentManager.beginTransaction().add(R.id.container, userCreateFragment).commit()
-    }
+        val userCreateFragment = UserCreateFragment()
+        val userDetailFragment = UserDetailFragment()
 
-
-    override fun onUserCreated(user: User) {
-        userDetailFragment.user = user
-        supportFragmentManager.beginTransaction().replace(R.id.container, userDetailFragment)
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, userCreateFragment, "userCreateFragment").commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, userDetailFragment, "userDetailFragment").hide(userDetailFragment)
             .commit()
     }
-
-    override fun onBackButtonPressed() {
-        supportFragmentManager.beginTransaction().replace(R.id.container, userCreateFragment)
-            .commit()
-    }
-
-
 }
