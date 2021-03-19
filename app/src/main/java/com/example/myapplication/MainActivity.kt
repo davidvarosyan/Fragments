@@ -20,7 +20,9 @@ class MainActivity : AppCompatActivity(), UserCreateFragmentListener, UserDetail
 
 
     override fun onUserCreated(user: User) {
-        userDetailFragment.user = user
+        val bundle = Bundle()
+        bundle.putSerializable("user", user)
+        userDetailFragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(R.id.container, userDetailFragment)
             .commit()
     }

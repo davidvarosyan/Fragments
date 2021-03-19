@@ -9,9 +9,7 @@ import kotlinx.android.synthetic.main.fragment_user_detail.*
 
 class UserDetailFragment : Fragment() {
 
-    var user:User? = null
     var listener:UserDetailFragmentListener? = null
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,8 +23,7 @@ class UserDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        user?.let {
+        (arguments?.getSerializable("user") as User?)?.let {
             name_text.text = it.name
             surname_text.text = it.surname
             age_text.text = it.age.toString()
