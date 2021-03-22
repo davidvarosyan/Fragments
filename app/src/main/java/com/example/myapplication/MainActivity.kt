@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity(), UserCreateFragmentListener, UserDetail
 
 
     override fun onUserCreated(user: User) {
-        userDetailFragment.user = user
+        userDetailFragment.userList.add(user)
         supportFragmentManager.beginTransaction().replace(R.id.container, userDetailFragment)
             .commit()
     }

@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ListView
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_user_detail.*
 
 class UserDetailFragment : Fragment() {
 
-    var user:User? = null
+    var userList:MutableList<User> = mutableListOf()
     var listener:UserDetailFragmentListener? = null
 
 
@@ -26,13 +28,14 @@ class UserDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        user?.let {
-            name_text.text = it.name
-            surname_text.text = it.surname
-            age_text.text = it.age.toString()
-        }
+        val adapter = UsersAdapter(context!!,R.layout.list_row , userList)
+        users_listView.adapter = adapter
+        adapter.notifyDataSetChanged()
+        users_listView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id -> }
 
-        button_back.setOnClickListener {
+
+        button_create_user.setOnClickListener {
             listener?.onBackButtonPressed()
         }
 
