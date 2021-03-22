@@ -10,7 +10,14 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     var userList: MutableList<User> = mutableListOf()
 
+   lateinit var clickListener:ClickListener
+
+    override fun getItemViewType(position: Int): Int {
+        return super.getItemViewType(position)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+
 
         val inflater = LayoutInflater.from(parent.context)
         val view = inflater.inflate(R.layout.list_row, parent,false)
@@ -19,6 +26,12 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.user = userList[position]
+        holder.itemView.setOnClickListener {
+
+        }
+        holder.itemView.setOnClickListener {
+            clickListener.onItemClick(position, userList[position])
+        }
         holder.init()
     }
 
@@ -29,6 +42,7 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         lateinit var user: User
+
         fun init() {
             itemView.apply {
                 findViewById<TextView>(R.id.name_text).text = user.name
@@ -38,4 +52,9 @@ class UserAdapter : RecyclerView.Adapter<UserAdapter.ViewHolder>() {
             itemView.invalidate()
         }
     }
+
+    interface ClickListener{
+        fun onItemClick(position:Int , user:User)
+    }
+
 }
