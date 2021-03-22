@@ -10,8 +10,8 @@ import kotlinx.android.synthetic.main.fragment_user_detail.*
 
 class UserDetailFragment : Fragment() {
 
-    var userList:MutableList<User> = mutableListOf()
-    var listener:UserDetailFragmentListener? = null
+    var userList: MutableList<User> = mutableListOf()
+    var listener: UserDetailFragmentListener? = null
 
 
     override fun onCreateView(
@@ -19,7 +19,7 @@ class UserDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_user_detail, container,false)
+        return inflater.inflate(R.layout.fragment_user_detail, container, false)
     }
 
 
@@ -40,6 +40,6 @@ class UserDetailFragment : Fragment() {
 
 }
 
-interface UserDetailFragmentListener{
+interface UserDetailFragmentListener {
     fun onBackButtonPressed()
 }
